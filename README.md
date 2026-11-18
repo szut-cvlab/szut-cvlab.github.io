@@ -79,7 +79,7 @@ npm run preview  # 预览构建产物
 | --- | --- |
 | 研究方向 | `src/content/research/research.md`，`items` 里每个块 = 一个方向（`title / desc`），独立页面 `/research/` |
 | 学术成果 | `src/content/publications/publications.md`，按 `groups`（期刊论文 / 会议论文 / 发明专利 / 学术奖励）维护条目，引用原文照录 |
-| 科研项目 | `src/content/grants/grants.md`，`items` 里每个块 = 一个课题（来源/类别/编号/名称/起止/经费/状态/角色），`status: 在研` 或 `结题`，独立页面 `/grants/` |
+| 科研项目 | `src/content/grants/grants.md`，`items` 里每个块 = 一个课题（来源/类别/编号/名称/起止/状态/角色），`status: 在研` 或 `结题`，独立页面 `/grants/` |
 | 开源项目 | `src/content/projects/projects.md`，`items` 里每个块 = 一个仓库（`name / url / language / desc`），独立页面 `/projects/` |
 | 团队成员 | `src/content/people/people.md`，`items` 里每个块 = 一位成员（`name / role / url / email / bio`） |
 | 实验室动态 | `src/content/news/news.md`，`items` 里每个块 = 一条动态（`title / date / desc`），按日期倒序 |
@@ -95,8 +95,11 @@ npm run preview  # 预览构建产物
 **合并部署**：将分支提 PR 合并到 `main` 分支，触发 `deploy.yml` 自动构建并发布（合并到 main 等价于一次 push 到 main）。
 
 **首次启用**：
-1. 仓库 **Settings → Pages → Source** 选择 **GitHub Actions**；
+1. 仓库 **Settings → Pages → Build and deployment → Source** 必须选 **GitHub Actions**；
 2. 将代码合并 / 推送到 `main` 分支，`deploy.yml` 会自动把 `dist/` 发布到 GitHub Pages。
+
+**注意**：
+- Source 不能选 `Deploy from a branch`——那样 GitHub 会额外注入 Jekyll 构建仓库根目录，和 `dist/` 抢同一个站点；Actions 里出现 `pages-build-deployment` 就是它，改回 GitHub Actions 即可。
 
 **可选加固（分支保护）**：公开仓库在 GitHub Free 下即可免费开启 `main` 分支保护规则，建议按以下勾选，进一步保证线上只来自 PR 合并（不开启也不影响部署）：
 
