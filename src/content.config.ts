@@ -78,7 +78,6 @@ const grants = defineCollection({
         code: z.string().optional(),
         title: z.string(),
         period: z.string().optional(),
-        funding: z.string().optional(),
         status: z.string().default('在研'),
         role: z.string().optional(),
       }),
